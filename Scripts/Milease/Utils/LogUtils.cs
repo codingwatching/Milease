@@ -23,12 +23,16 @@ namespace Milease.Utils
         
         public static void Warning(string content)
         {
+#if UNITY_EDITOR
             Debug.LogWarning(PREFIX + content);
+#endif
         }
         
         public static void Info(string content)
         {
+#if UNITY_EDITOR
             Debug.Log(PREFIX + content);
+#endif
         }
         
         public static void Throw(string content)
