@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Threading;
+using System.Threading.Tasks;
 using Milease.Core.Animation;
 using Milease.Core.Manager;
 using Milease.Enums;
+using Milease.Milease.Exception;
 #if UNITY_EDITOR
 using Milease.Editor;
 using UnityEditor;
@@ -23,6 +26,7 @@ namespace Milease.Core.Animator
         public TimeSource TimeSource = TimeSource.UnScaledTime;
         
         internal Action PlayCallback;
+        internal TaskCompletionSource<bool> PlayTcs;
         
         internal int PlayIndex = 0;
         internal float Time = 0f;
@@ -194,6 +198,7 @@ namespace Milease.Core.Animator
 
         public void Pause()
         {
+            PlayTcs?.TrySetException(new MilAwaitAniPausedException());
             MilInstantAnimatorManager.CancelPlayTask(this);
         }
 
@@ -244,8 +249,19 @@ namespace Milease.Core.Animator
         
         public void Stop()
         {
+            PlayTcs?.TrySetCanceled();
             Reset(DefaultResetMode);
             Pause();
+        }
+
+        public Task Await()
+        {
+            if (PlayTcs != null && (PlayTcs.Task.IsFaulted || PlayTcs.Task.IsCanceled))
+            {
+                PlayTcs = null;
+            }
+            PlayTcs ??= new TaskCompletionSource<bool>();
+            return PlayTcs.Task;
         }
         
 #if UNITY_EDITOR

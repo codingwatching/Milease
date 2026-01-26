@@ -140,6 +140,8 @@ namespace Milease.Core.Manager
                     if (set.PlayIndex >= set.Collection.Count)
                     {
                         set.PlayCallback?.Invoke();
+                        set.PlayTcs?.TrySetResult(true);
+                        set.PlayTcs = null;
                         _aniHashSet.Remove(set);
                         _animations.RemoveAt(i);
                         i--;
