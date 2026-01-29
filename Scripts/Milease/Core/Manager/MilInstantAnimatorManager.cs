@@ -48,11 +48,21 @@ namespace Milease.Core.Manager
             {
                 _animations.RemoveAll(x => !x.dontStopOnLoad && x.ActiveScene == scene.name);
             };
+            Application.quitting += Instance.OnExitApplication;
         }
 
         private static readonly List<MilInstantAnimator> _animations = new List<MilInstantAnimator>();
         private static readonly HashSet<MilInstantAnimator> _aniHashSet = new HashSet<MilInstantAnimator>();
 
+        private void OnExitApplication()
+        {
+            Application.quitting -= OnExitApplication;
+            _animations.Clear();
+            _aniHashSet.Clear();
+            Destroy(gameObject);
+            Instance = null;
+        }
+        
         internal static bool IsPlayTaskActive(MilInstantAnimator animator)
             => _aniHashSet.Contains(animator);
         

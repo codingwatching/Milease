@@ -27,6 +27,15 @@ namespace Milease.Core.Manager
             {
                 Animators.RemoveAll(x => !x.dontStopOnLoad && x.ActiveScene == scene.name);
             };
+            Application.quitting += Instance.OnExitApplication;
+        }
+        
+        private void OnExitApplication()
+        {
+            Application.quitting -= OnExitApplication;
+            Animators.Clear();
+            Destroy(gameObject);
+            Instance = null;
         }
         
         private void Update()
