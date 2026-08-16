@@ -6,7 +6,7 @@
 
 🎥 Milease is a toolkit aimed at enhancing the Unity UI development experience. It includes more convenient UI animation tools, such as using the Milease Animator to create UI transition animations or using the State Animator for a CSS-like UI design experience. Additionally, Milease contains other UI tools, such as infinite lists.
 
-Milease is developed by the Morizero team for creating UI tools for their non-commercial rhythm music game, Milthm. At the same time, it maximizes the provision of more general functionalities to benefit the wider community of Unity frontend developers.
+Milease is developed by the Morizero team for creating UI tools. At the same time, it maximizes the provision of more general functionalities to benefit the wider community of Unity frontend developers.
 
 **Special Thanks**: 
 

@@ -127,7 +127,7 @@ namespace Milease.Editor
             None, CodeGen, Expression
         }
         
-        private Texture HeadBar, Luvia;
+        private Texture HeadBar, MorizeroLOGO;
         private Vector2 scrollPos;
         
         private bool scriptCompiling = false;
@@ -136,7 +136,7 @@ namespace Milease.Editor
         {
             HeadBar = AssetDatabase.LoadAssetAtPath<Texture>(
                 AssetDatabase.GUIDToAssetPath("62afa0cef89f3e84391bac8f4a307834"));
-            Luvia = AssetDatabase.LoadAssetAtPath<Texture>(
+            MorizeroLOGO = AssetDatabase.LoadAssetAtPath<Texture>(
                 AssetDatabase.GUIDToAssetPath("0ea68c72f97f3e742ad5c0b249aa32e9"));
             
             CompilationPipeline.compilationStarted += StartCompiling;
@@ -212,11 +212,6 @@ namespace Milease.Editor
             }
             GUILayout.Space(10f);
             
-            if (GUILayout.Button("Our Game ↗", new GUIStyle(EditorStyles.linkLabel)))
-            {
-                Application.OpenURL("https://milthm.com");
-            }
-            
             EditorGUILayout.EndHorizontal();
             
             EditorGUILayout.Separator();
@@ -257,13 +252,13 @@ namespace Milease.Editor
             {
                 padding = new RectOffset(8, 8, 8, 8)
             });
-            GUILayout.Label(Luvia, new GUIStyle()
+            GUILayout.Label(MorizeroLOGO, new GUIStyle()
             {
                 fixedWidth = 48f,
                 fixedHeight = 48f
             });
             
-            if (GUILayout.Button("If you think this project is helpful to you, how about buying Luvia a cup of coffee?", new GUIStyle(EditorStyles.linkLabel)
+            if (GUILayout.Button("If you think this project is helpful to you, how about buying us a cup of coffee?", new GUIStyle(EditorStyles.linkLabel)
                 {
                     fontSize = 14,
                     margin = new RectOffset(16, 0, 9, 0),
